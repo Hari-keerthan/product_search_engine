@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>product search engine</title>
+	<link rel="stylesheet" href="{{ url_for('static', filename='tabel.css')}}">
+	
+</head>
+
+<body>
+    <div>
+	
+		<form action="." method="GET">
+		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
+		</form>
+
+        <h3>{{ flp }}</h3>
+		<img src="{{ url_for('static', filename = 'flipkart.png') }}" width="350" height="200">
+        <table class="container">
+            {% for key, value in product_flip.items() %}
+            <tr><td><a href="{{ value.1|e }}"> {{ key|e }}</a></td><td>{{ value.0|e }}</td></tr>
+            {% endfor %}
+        </table>
+		
+		<form action="." method="GET">
+		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
+		</form>
+		
+		<h3>{{ amz }}</h3>
+		<img src="{{ url_for('static', filename = 'amazon.png') }}" width="200" height="200">
+		<table class="container">
+			{% for key,value in product_amaz.items() %}
+			<tr><td><a href="{{ value.1|e }}">{{ key|e }}</a></td><td>{{ value.0|e }}</td><td><img src="{{ value.2|e }}" width="125px" height="125px"></td></tr>
+			{% endfor %}
+		</table>
+		
+		<form action="." method="GET">
+		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
+		</form>
+		
+		<h3>{{ pay }}</h3>
+		<img src="{{ url_for('static', filename = 'paytm.png') }}" width="200" height="200">
+		<table class="container">
+			{% for key, value in product_pay.items() %}
+			<tr><td><a href="{{ value.2|e }}">{{ key|e }}</a></td><td>{{ value.0|e }}</td><td>{{ value.1|e }}</td></tr>
+			{% endfor %}
+		</table>
+		
+		<form action="." method="GET">
+		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
+		</form>
+		
+		<h3>{{ crm }}</h3>
+		<img src="{{ url_for('static', filename = 'croma.png') }}" width="250" height="200">
+		{%if product_crm.items()|length %}
+			<table class="container">
+				{% for key, value in product_crm.items() %}
+					<tr><td><a href="{{ value.1|e }}">{{ key|e }}</a></td><td>{{ value.0|e }}</td><td><img src="{{ value.2|e }}" width="125px" height="125px"></td></tr>
+				{% endfor %}
+			</table>
+		{% else %}
+			<h4>no item found</h4>
+		{% endif %}
+		
+		<form action="." method="GET">
+		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
+		</form>
+		
+    </div>
+</body>
+
+</html>
