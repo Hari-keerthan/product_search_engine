@@ -17,11 +17,7 @@ def my_form():
 
 
 def flipkart(i):
-    '''
-    myfile="C:\\Users\\hkb39226\\.spyder-py3\\templates\\openform.html"
-    if os.path.isfile(myfile):
-        os.remove(myfile)
-        '''
+
     inp = i
     middle = i.replace(" ","%20")
     first ='https://www.flipkart.com/search?q='
@@ -45,6 +41,8 @@ def flipkart(i):
         link = soup.find_all('a', {"class": "_2cLu-l"})
     if len(link) == 0:
         link = soup.find_all('a', {"class": "Zhf2z-"})
+    if len(link) == 0:
+        link = soup.find_all('a', {"class": "_3dqZjq"})
         #print('https://www.flipkart.com'+i['href'])
     price_aftr = []
     rev_aftr = []
@@ -55,6 +53,19 @@ def flipkart(i):
             price_aftr.append(i.text)
             rev_aftr.append(j.text)
             link_aftr.append('https://www.flipkart.com'+k['href'])
+    tr = 0
+            
+    if len(rev_aftr) < 3:
+        price_aftr = []
+        rev_aftr = []
+        link_aftr = []
+        for i,j,k in zip(cost,reviews,link):
+            price_aftr.append(i.text)
+            print(j.text)
+            rev_aftr.append(j.text)
+            link_aftr.append('https://www.flipkart.com'+k['href'])
+            tr=tr+1
+        
     opt = dict(zip(rev_aftr,zip(price_aftr,link_aftr)))
     return opt
     #return render_template("index.html",message="flipkart123",contacts=opt)
@@ -83,10 +94,6 @@ def amazon(i):
     price_aftr = []
     link = soup.find_all('a' ,{"class": "a-link-normal a-text-normal"})
     link_aftr = []
-    '''
-    for i in link:
-        link_aftr.append('https://www.amazon.in'+i['href'])
-        '''
     for i,j,k,l in zip(cost,reviews,link,image):
         str2 = str(j.text)
         Ratio = fuzz.partial_ratio(inp.lower(),str2.lower())
