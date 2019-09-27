@@ -53,7 +53,6 @@ def flipkart(i):
             price_aftr.append(i.text)
             rev_aftr.append(j.text)
             link_aftr.append('https://www.flipkart.com'+k['href'])
-    tr = 0
             
     if len(rev_aftr) < 3:
         price_aftr = []
@@ -64,7 +63,6 @@ def flipkart(i):
             print(j.text)
             rev_aftr.append(j.text)
             link_aftr.append('https://www.flipkart.com'+k['href'])
-            tr=tr+1
         
     opt = dict(zip(rev_aftr,zip(price_aftr,link_aftr)))
     return opt
@@ -94,6 +92,10 @@ def amazon(i):
     price_aftr = []
     link = soup.find_all('a' ,{"class": "a-link-normal a-text-normal"})
     link_aftr = []
+    '''
+    for i in link:
+        link_aftr.append('https://www.amazon.in'+i['href'])
+        '''
     for i,j,k,l in zip(cost,reviews,link,image):
         str2 = str(j.text)
         Ratio = fuzz.partial_ratio(inp.lower(),str2.lower())
@@ -102,6 +104,16 @@ def amazon(i):
             rev_aftr.append(j.text)
             link_aftr.append('https://www.amazon.in'+k['href'])
             img_aftr.append(l['src'])
+    if len(rev_aftr) < 3:
+        price_aftr = []
+        rev_aftr = []
+        link_aftr = []
+        for i,j,k in zip(cost,reviews,link):
+            price_aftr.append(i.text)
+            print(j.text)
+            rev_aftr.append(j.text)
+            link_aftr.append('https://www.flipkart.com'+k['href'])
+    
     opt = dict(zip(rev_aftr,zip(price_aftr,link_aftr,img_aftr)))
     return opt
 
@@ -199,4 +211,4 @@ def try2():
     return render_template("test.html")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run()
