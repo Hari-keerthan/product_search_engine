@@ -196,9 +196,9 @@ def my_form_post():
     text1 = request.form['text1']
     return text1
 
-@app.route('/index', methods=['POST','GET'])
-def hell():
-    text1 = my_form_post()    
+@app.route('/<product>', methods=['POST','GET'])
+def hell(product):
+    text1 = product    
     flip = flipkart(text1)
     amaz = amazon(text1)
     pytm = paytm(text1)
