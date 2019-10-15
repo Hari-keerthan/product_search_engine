@@ -4,6 +4,7 @@ from flask import render_template
 import requests
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
+import ray
 import re
 
 app = Flask(__name__)
@@ -15,7 +16,7 @@ def my_form():
 
 
 
-
+@ray.remote
 def flipkart(i):
 
     inp = i
@@ -60,14 +61,14 @@ def flipkart(i):
         link_aftr = []
         for i,j,k in zip(cost,reviews,link):
             price_aftr.append(i.text)
-            print(j.text)
             rev_aftr.append(j.text)
             link_aftr.append('https://www.flipkart.com'+k['href'])
         
     opt = dict(zip(rev_aftr,zip(price_aftr,link_aftr)))
     return opt
     #return render_template("index.html",message="flipkart123",contacts=opt)
-    
+ 
+@ray.remote
 def amazon(i):
     inp = i
     middle = i.replace(" ","+")
@@ -110,13 +111,13 @@ def amazon(i):
         link_aftr = []
         for i,j,k in zip(cost,reviews,link):
             price_aftr.append(i.text)
-            print(j.text)
             rev_aftr.append(j.text)
             link_aftr.append('https://www.flipkart.com'+k['href'])
     
     opt = dict(zip(rev_aftr,zip(price_aftr,link_aftr,img_aftr)))
     return opt
 
+@ray.remote
 def paytm(i):
     inp = i
     middle = i.replace(" ","%20")
@@ -155,7 +156,7 @@ def paytm(i):
     opt = dict(zip(rev_aftr, zip(price_aftr,offer_aftr,link_aftr)))
     return opt
 
-
+@ray.remote
 def croma(i):
     inp = i
     middle = i.replace(" ","+")
@@ -198,17 +199,24 @@ def my_form_post():
 
 @app.route('/<product>', methods=['POST','GET'])
 def hell(product):
-    text1 = product    
+    text1 = product   
+    flip = flipkart.remote(text1)
+    amaz = amazon.remote(text1)
+    pytm = paytm.remote(text1)
+    chrm = croma.remote(text1)
+    ray.get([flip, amaz , pytm , chrm])
+    '''
     flip = flipkart(text1)
     amaz = amazon(text1)
     pytm = paytm(text1)
     chrm = croma(text1)
+        '''
     
     return render_template("index.html",flp="flipkart",product_flip=flip,amz="AMAZON",product_amaz=amaz,pay="PAYTM",product_pay=pytm,crm="CHROMA",product_crm=chrm)
 
-@app.route('/test.html', methods=['POST','GET'])
+@app.route('/test', methods=['POST','GET'])
 def try2():
     return render_template("test.html")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(debug=True)
