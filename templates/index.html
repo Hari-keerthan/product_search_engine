@@ -8,7 +8,17 @@
 </head>
 
 <body link=#FB667A>
-    <div>
+	<div class="container">
+		<div class="nav" id="nav">
+		<ul id="tab">
+			<li><a href="#flip">Flipkart  </a></li>
+			<li><a href="#amaz">Amazon  </a></li>
+			<li><a href="#pay">Paytm  </a></li>
+			<li><a href="#cro">croma  </a></li>
+		</ul>
+		</div>
+
+    <div class="filpkart" id="flip">
 	
 		<form action="." method="GET">
 		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
@@ -21,6 +31,10 @@
             <tr><td><a href="{{ value.1|e }}"> {{ key|e }}</a></td><td>{{ value.0|e }}</td></tr>
             {% endfor %}
         </table>
+		<div class="back-to-top"><a href="#nav">Back to top</a></div>
+	</div>
+	
+	<div class="amazon" id="amaz">
 		
 		<form action="." method="GET">
 		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
@@ -33,7 +47,10 @@
 			<tr><td><a href="{{ value.1|e }}">{{ key|e }}</a></td><td>{{ value.0|e }}</td><td><img src="{{ value.2|e }}" width="125px" height="125px"></td></tr>
 			{% endfor %}
 		</table>
-		
+		<div class="back-to-top"><a href="#nav">Back to top</a></div>
+	</div>
+	
+	<div class="paytm" id="pay">
 		<form action="." method="GET">
 		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
 		</form>
@@ -45,6 +62,10 @@
 			<tr><td><a href="{{ value.2|e }}">{{ key|e }}</a></td><td>{{ value.0|e }}</td><td>{{ value.1|e }}</td></tr>
 			{% endfor %}
 		</table>
+		
+	</div>
+	
+	<div class ="croma" id="cro">
 		
 		<form action="." method="GET">
 		<button class="button1" style="vertical-align:middle" type="submit" name="my-form" value="search"><span>back</span></button>
@@ -67,6 +88,8 @@
 		</form>
 		
     </div>
+	<div class="back-to-top"><a href="#nav">Back to top</a></div>
+	</div>
 </body>
 
 </html>
