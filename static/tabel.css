@@ -149,3 +149,69 @@ h2 a {
   opacity: 1;
   right: 0;
 }
+/*
+.tab li{
+	display:inline;
+	float:left;
+}*/
+html{
+	scroll-behavior : smooth;
+}
+
+
+.nav {
+  padding: 25px 15px 0 15px;
+  background: #1F2739;
+}
+ul#tab {
+  list-style-type: none;
+  width: 100%;
+  position: relative;
+  height: 27px;
+  font-size: 13px;
+  font-weight: bold;
+  margin: 0;
+  padding: 11px 0 0 0;
+}
+
+ul#tab li {
+  display: block;
+  float: left;
+  margin: 0 0 0 4px;
+  height: 27px;
+}
+
+ul#tab li.left {
+  margin: 0;
+}
+
+ul#tab li a {
+  display: block;
+  float: left;
+  color: #fff;
+  background: #4A6867;
+  line-height: 27px;
+  text-decoration: none;
+  padding: 0 17px 0 18px;
+  height: 27px;
+}
+
+ul#tab li a.right {
+  padding-right: 19px;
+}
+
+ul#tab li a:hover {
+  background: #2E4560;
+}
+
+ul#tab li a.current {
+  color: #2E4560;
+  background: #fff;
+}
+
+ul#tab li a.current:hover {
+  color: #2E4560;
+  background: #fff;
+}
+
+
