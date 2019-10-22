@@ -61,7 +61,6 @@ def flipkart(i):
         link_aftr = []
         for i,j,k in zip(cost,reviews,link):
             price_aftr.append(i.text)
-            print(j.text)
             rev_aftr.append(j.text)
             link_aftr.append('https://www.flipkart.com'+k['href'])
         
