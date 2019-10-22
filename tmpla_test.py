@@ -4,6 +4,7 @@ from flask import render_template
 import requests
 from bs4 import BeautifulSoup
 from fuzzywuzzy import fuzz
+from concurrent.futures import ThreadPoolExecutor
 import re
 
 app = Flask(__name__)
@@ -198,11 +199,16 @@ def my_form_post():
 
 @app.route('/<product>', methods=['POST','GET'])
 def hell(product):
-    text1 = product    
-    flip = flipkart(text1)
-    amaz = amazon(text1)
-    pytm = paytm(text1)
-    chrm = croma(text1)
+    text1 = product
+    executor = ThreadPoolExecutor(max_workers=10)
+    flip = executor.submit(flipkart,text1)
+    amaz = executor.submit(amazon,text1)
+    pytm = executor.submit(paytm,text1)
+    chrm = executor.submit(croma,text1)
+    flip = flip.result()
+    amaz = amaz.result()
+    pytm = pytm.result()
+    chrm = chrm.result()
     
     return render_template("index.html",flp="flipkart",product_flip=flip,amz="AMAZON",product_amaz=amaz,pay="PAYTM",product_pay=pytm,crm="CHROMA",product_crm=chrm)
 
@@ -211,4 +217,4 @@ def try2():
     return render_template("test.html")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0',debug=True)
