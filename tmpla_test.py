@@ -171,7 +171,7 @@ def croma(i):
     print(r)
     content = r.content.decode(encoding='UTF-8')
     soup = BeautifulSoup(content, "lxml")
-    reviews = soup.find_all('h2')
+    reviews = soup.find_all('h3')
     cost = soup.find_all('span', {"class": "pdpPrice"})
     link = soup.find_all('a' , {'class' : 'product__list--thumb'})
     image = soup.find_all('img', {'class' : '_primaryImg'})
