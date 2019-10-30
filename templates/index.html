@@ -42,11 +42,15 @@
 		
 		<h3>{{ amz }}</h3>
 		<img src="{{ url_for('static', filename = 'amazon.png') }}" width="200" height="200">
+		{%if product_crm.items()|length %}
 		<table class="container">
 			{% for key,value in product_amaz.items() %}
 			<tr><td><a href="{{ value.1|e }}" target="_blank">{{ key|e }}</a></td><td>{{ value.0|e }}</td><td><img src="{{ value.2|e }}" width="125px" height="125px"></td></tr>
 			{% endfor %}
 		</table>
+		{% else %}
+			<h4>no item found</h4>
+		{% endif %}
 		<div class="back-to-top"><a href="#nav">Back to top</a></div>
 	</div>
 	
