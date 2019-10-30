@@ -26,7 +26,6 @@ def flipkart(i):
     url1 = str(first)+str(middle)+str(last)
     print(url1)
     r = requests.get(url1)
-    print(r)
     content = r.content.decode(encoding='UTF-8')
     soup = BeautifulSoup(content, "lxml")
     regex = re.compile('.*_1vC4OE.*')
@@ -127,7 +126,6 @@ def paytm(i):
     url4 = str(first)+str(middle)+str(last)
     print(url4)
     r = requests.get(url4)
-    print(r)
     content = r.content.decode(encoding='UTF-8')
     soup = BeautifulSoup(content, "lxml")
     reviews = soup.find_all('div', {"class": "_2apC"})
@@ -225,4 +223,4 @@ def try2():
     return render_template("test.html")
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0')
+    app.run(debug=True,host='0.0.0.0')
