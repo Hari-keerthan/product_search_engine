@@ -27,6 +27,7 @@ def flipkart(i):
     print(url1)
     r = requests.get(url1)
     print(r)
+    print("test")
     content = r.content.decode(encoding='UTF-8')
     soup = BeautifulSoup(content, "lxml")
     regex = re.compile('.*_1vC4OE.*')
