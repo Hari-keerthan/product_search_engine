@@ -169,7 +169,7 @@ def croma(i):
     headers = {'User-Agent': 'Chrome' }
     r = requests.get(url5,headers=headers)
     print(r)
-    content = r.content.decode(encoding='UTF-8')
+    content = r.content.decode(encoding='utf-16')
     soup = BeautifulSoup(content, "lxml")
     reviews = soup.find_all('h3')
     cost = soup.find_all('span', {"class": "pdpPrice"})
