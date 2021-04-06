@@ -84,7 +84,7 @@ def amazon(i):
     print(r)
     content = r.content.decode(encoding='UTF-8')
     soup = BeautifulSoup(content, "lxml")
-    regex = re.compile('.*a-section a-spacing-medium.*')
+    regex = re.compile('.*a-color-base a-text-normal.*')
     #reviews = soup.find_all("span", {"class": "a-size-medium a-color-base a-text-normal"})
     reviews = soup.find_all("span",{"class": regex})
     cost = soup.find_all('span', {"class": "a-price-whole"})
