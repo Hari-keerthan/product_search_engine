@@ -113,7 +113,7 @@ def amazon(i):
         for i,j,k in zip(cost,reviews,link):
             price_aftr.append(i.text)
             rev_aftr.append(j.text)
-            link_aftr.append('https://www.flipkart.com'+k['href'])
+            link_aftr.append('https://www.amazon.in'+k['href'])
     
     opt = dict(zip(rev_aftr,zip(price_aftr,link_aftr,img_aftr)))
     return opt
